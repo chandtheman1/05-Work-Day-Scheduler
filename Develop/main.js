@@ -95,12 +95,22 @@ for (var i = 0; i < saveBtn.length; i++) {
 
 
 function saveData(event) {
-   console.log(event);
-   console.log(event.toElement.classList[3]);
 
-   var savedID = event.toElement.classList[3];
+    var savedID = event.toElement.classList[3];
 
-   var savedText = textAreaBlock[event.toElement.classList[3]].value;
-   timeArray[event.toElement.classList[3]].data = savedText;
+    var savedText = textAreaBlock[savedID].value;
+    timeArray[savedID].data = savedText;
+    //need to push new data in as hitting the set refreshes everything
+    localStorage.setItem("Planner", JSON.stringify(timeArray));
+}
 
+var parseData = JSON.parse(localStorage.getItem("Planner"));
+
+
+for (var i = 0; i < timeArray.length; i++) {
+    if (parseData[i].data == "") {
+        parseData[i].data = "";
+    } else {
+        textAreaBlock[i].value = parseData[i].data;
+    }
 }
