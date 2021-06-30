@@ -1,11 +1,14 @@
 var currentDayEl = $("#currentDay");
-
+//Shows current date and day on the top
 currentDayEl.text(moment().format("dddd MMMM Do"));
 
 var containerEl = $(".container");
+var currentTime = moment().format("H");
 
-
-
+var button;
+var textArea;
+var textAreaBox;
+//time calendar that can be expanded
 var timeArray = [
                     {   
                         id: "0",
@@ -65,23 +68,23 @@ var timeArray = [
 
 
 
-
-var button;
-var textArea;
-var textAreaBox;
+//creates, innerhtml, appends each time block with a text area and button
 
 function dayPlanner(item) {
+    //creates all the elements for timeblock
     var div = document.createElement("div");
     var secondDiv = document.createElement("div");
     var textArea = document.createElement("textarea");
     var button = document.createElement("button");
-
-    secondDiv.innerHTML = timeArray[item].time;
-
+    
+    secondDiv.innerHTML = timeArray[item].time + moment().format("A");
+    //add classes to all elements
     div.classList.add("form-group", "custom-display");
     secondDiv.classList.add("time-block");
+    //assigned the textArea with a number class so it can be accessed later for background
     textArea.classList.add("form-control", item);
     textArea.setAttribute("rows", "3");
+    //button picture pulls from font-awesome
     button.classList.add("fas", "fa-save", "saveBtn", item);
 
     containerEl.append(div);
@@ -90,7 +93,7 @@ function dayPlanner(item) {
     div.appendChild(button);
 
 }
-
+//loop that creates/innerhtml/append each timeblock
 for (var i = 0; i < timeArray.length; i++) {
     dayPlanner(timeArray[i].id);
 }
@@ -98,46 +101,9 @@ for (var i = 0; i < timeArray.length; i++) {
 var saveBtn = document.querySelectorAll(".saveBtn");
 var textAreaBlock = document.querySelectorAll(".form-control");
 
-
-for (var i = 0; i < saveBtn.length; i++) {
-    saveBtn[i].addEventListener("click", saveData)
-}
-
-
-var parseData = JSON.parse(localStorage.getItem("Planner"));
-
-
-
-
-function saveData(event) {
-
-    var savedID = event.toElement.classList[3];
-
-    var savedText = textAreaBlock[savedID].value;
-    timeArray[savedID].data = savedText;
- 
-
- 
-    localStorage.setItem("Planner", JSON.stringify(timeArray));
-
-}
+//sets the status of each time block as present/future/past according to its CSS color
 
 for (var i = 0; i < timeArray.length; i++) {
-    if (parseData[i].data === "") {
-
-        textAreaBlock[i].value = parseData[i].data;
-
-    } else {
-        textAreaBlock[i].value = parseData[i].data;
-        timeArray[i].data = parseData[i].data;
-    }
-}
-
-var currentTime = moment().format("H");
-
-for (var i = 0; i < timeArray.length; i++) {
-
-
     var timeID = timeArray[i].id;
 
     if (currentTime == timeArray[i].time24) {
@@ -151,6 +117,40 @@ for (var i = 0; i < timeArray.length; i++) {
         $("." + timeID).addClass("future");
 
     }
-
 }
   
+//add for loop for button event listeners
+for (var i = 0; i < saveBtn.length; i++) {
+    saveBtn[i].addEventListener("click", saveData)
+}
+
+
+var parseData = JSON.parse(localStorage.getItem("Planner"));
+
+//function to save data to localstorage
+function saveData(event) {
+
+    var savedID = event.toElement.classList[3];
+
+    var savedText = textAreaBlock[savedID].value;
+    timeArray[savedID].data = savedText;
+    localStorage.setItem("Planner", JSON.stringify(timeArray));
+
+}
+
+//displays localstorage content if pages refreshes and makes sure it doesnt get reset
+for (var i = 0; i < timeArray.length; i++) {
+    if (parseData[i].data === "") {
+
+        textAreaBlock[i].value = parseData[i].data;
+
+    } else {
+
+        textAreaBlock[i].value = parseData[i].data;
+        timeArray[i].data = parseData[i].data;
+
+    }
+}
+
+
+
