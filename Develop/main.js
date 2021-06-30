@@ -12,55 +12,55 @@ var textAreaBox;
 var timeArray = [
                     {   
                         id: "0",
-                        time: "9",
+                        time: "9AM",
                         data: "",
                         time24: "09"
                     },
                     {
                         id: "1",
-                        time: "10",
+                        time: "10AM",
                         data: "",
                         time24: "10"
                     },
                     {
                         id: "2",
-                        time: "11",
+                        time: "11AM",
                         data: "",
                         time24: "11"
                     },
                     {
                         id: "3",
-                        time: "12",
+                        time: "12PM",
                         data: "",
                         time24: "12"
                     },
                     {
                         id: "4",
-                        time: "1",
+                        time: "1PM",
                         data: "",
                         time24: "13"
                     },
                     {
                         id: "5",
-                        time: "2",
+                        time: "2PM",
                         data: "",
                         time24: "14"
                     },
                     {
                         id: "6",
-                        time: "3",
+                        time: "3PM",
                         data: "",
                         time24: "15"
                     },
                     {
                         id: "7",
-                        time: "4",
+                        time: "4PM",
                         data: "",
                         time24: "16"
                     },
                     {
                         id: "8",
-                        time: "5",
+                        time: "5PM",
                         data: "",
                         time24: "17"
                     },
@@ -77,7 +77,7 @@ function dayPlanner(item) {
     var textArea = document.createElement("textarea");
     var button = document.createElement("button");
     
-    secondDiv.innerHTML = timeArray[item].time + moment().format("A");
+    secondDiv.innerHTML = timeArray[item].time;
     //add classes to all elements
     div.classList.add("form-group", "custom-display");
     secondDiv.classList.add("time-block");
