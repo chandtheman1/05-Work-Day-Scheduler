@@ -97,16 +97,6 @@ for (var i = 0; i < saveBtn.length; i++) {
 var parseData = JSON.parse(localStorage.getItem("Planner"));
 
 
-for (var i = 0; i < timeArray.length; i++) {
-    if (parseData[i].data == "") {
-        textAreaBlock[i].value = parseData[i].data;
-
-    } else {
-        textAreaBlock[i].value = parseData[i].data;
-        timeArray[i].data = parseData[i].data;
-    }
-}
-
 
 
 function saveData(event) {
@@ -115,48 +105,21 @@ function saveData(event) {
 
     var savedText = textAreaBlock[savedID].value;
     timeArray[savedID].data = savedText;
+ 
 
-
+ 
     localStorage.setItem("Planner", JSON.stringify(timeArray));
 
 }
 
-// var noPreviousData = [];
-// for (var i = 0; i <parseData.length; i++) {   
-//     function checkData(i) {
-//         if (parseData[i].data === "") {
-//             console.log("true");
-//             noPreviousData.push(true);
-//         } else {
-//             console.log("false");
-//             noPreviousData.push(false);
+for (var i = 0; i < timeArray.length; i++) {
+    if (parseData[i].data === "") {
 
-//         }
-//     }
-//     checkData(i);
-// }
+        textAreaBlock[i].value = parseData[i].data;
 
+    } else {
+        textAreaBlock[i].value = parseData[i].data;
+        timeArray[i].data = parseData[i].data;
+    }
+}
 
-// function checkStatus(status) {
-//     return status == true;
-// }
-
-
-
-// if  all parseData.data contains "" then set local Storage
-// if one parseData contains "eljfsdlkjfds" then push local storage
-
-// function search() {
-//     for (var i = 0; i < parseData.length; i++) {
-//         if (parseData[i].data === "") {
-//            return parseData[i];
-//         }
-//     }
-// }
-
-
-
-// for (var i = 0; i < parseData.length; i++) {
-//     parseData.every( function(i) {
-//    return parseData[i].data === "";
-// })}
