@@ -10,49 +10,59 @@ var timeArray = [
                     {   
                         id: "0",
                         time: "9",
-                        data: ""
+                        data: "",
+                        time24: "09"
                     },
                     {
                         id: "1",
                         time: "10",
-                        data: ""
+                        data: "",
+                        time24: "10"
                     },
                     {
                         id: "2",
                         time: "11",
-                        data: ""
+                        data: "",
+                        time24: "11"
                     },
                     {
                         id: "3",
                         time: "12",
-                        data: ""
+                        data: "",
+                        time24: "12"
                     },
                     {
                         id: "4",
                         time: "1",
-                        data: ""
+                        data: "",
+                        time24: "13"
                     },
                     {
                         id: "5",
                         time: "2",
-                        data: ""
+                        data: "",
+                        time24: "14"
                     },
                     {
                         id: "6",
                         time: "3",
-                        data: ""
+                        data: "",
+                        time24: "15"
                     },
                     {
                         id: "7",
                         time: "4",
-                        data: ""
+                        data: "",
+                        time24: "16"
                     },
                     {
                         id: "8",
                         time: "5",
-                        data: ""
+                        data: "",
+                        time24: "17"
                     },
 ];
+
 
 
 
@@ -123,3 +133,24 @@ for (var i = 0; i < timeArray.length; i++) {
     }
 }
 
+var currentTime = moment().format("H");
+
+for (var i = 0; i < timeArray.length; i++) {
+
+
+    var timeID = timeArray[i].id;
+
+    if (currentTime == timeArray[i].time24) {
+
+        $("." + timeID).addClass("present");
+    } else if (currentTime > timeArray[i].time24) {
+
+        $("." + timeID).addClass("past");
+    } else if (currentTime < timeArray[i].time24) {
+
+        $("." + timeID).addClass("future");
+
+    }
+
+}
+  
